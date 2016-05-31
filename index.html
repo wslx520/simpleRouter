@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>router</title>
+</head>
+<body>
+
+<a href="#fruit">fruit</a> <a href="#fruit/apple">fruit/apple</a>
+    <script src="simpleRouter.js"></script>
+    <script>
+// 精确匹配 `/fruit`
+route('/fruit', function(name) {
+  console.log('The list of fruits')
+})
+// 匹配 `/fruit`
+route('/fruit/*', function(name) {
+  console.log('sub fruit')
+})
+route.start();
+// setTimeout(function () {
+//     // 直接去某路由
+//     route('/fruit');
+// },1000)
+    </script>
+</body>
+</html>
