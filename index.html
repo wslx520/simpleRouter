@@ -5,19 +5,26 @@
     <title>router</title>
 </head>
 <body>
-
-<a href="#fruit">fruit</a> <a href="#fruit/apple">fruit/apple</a>
+<a href="#fruit">fruit</a> <a href="#fruit/apple">fruit/apple</a> <a href="#fruit/banana">fruit/banana</a>
+<div id="content">
+    
+</div>
     <script src="simpleRouter.js"></script>
     <script>
+    var content = document.getElementById('content');
+route('/', function () {
+    content.innerHTML = ('/')
+})
 // 精确匹配 `/fruit`
 route('/fruit', function(name) {
-  console.log('The list of fruits')
+  content.innerHTML = ('The list of fruits')
 })
 // 匹配 `/fruit`
 route('/fruit/*', function(name) {
-  console.log('sub fruit')
+  content.innerHTML = ('sub fruit: '+ name)
 })
-route.start();
+// 传入true会对当前url执行一下路由判断，有路由则会进入相应路由
+route.start(true);
 // setTimeout(function () {
 //     // 直接去某路由
 //     route('/fruit');

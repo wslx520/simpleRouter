@@ -5,6 +5,8 @@ var notModify = function (obj) {
     obj.enumerable = obj.writable =obj.configurable = false;
     return obj;
 }
+
+// 此函数的作用相当于给一个对象添加on,off,once,trigger方法
 var observable = function(el) {
 
   /**
@@ -148,7 +150,8 @@ var RE_ORIGIN = /^.+?\/\/+[^\/]+/,
   central = observable(),
   routeFound = false,
   debouncedEmit,
-  base, current, parser, secondParser, emitStack = [], emitStackLevel = 0
+  base, current, parser, secondParser, emitStack = [], emitStackLevel = 0,
+  queryReg = /[?&](.+?)=([^&]*)/g
 
 /**
  * Default parser. You can replace it via router.parser method.
@@ -416,7 +419,7 @@ route.parser = function(fn, fn2) {
 route.query = function() {
   var q = {}
   var href = loc.href || current
-  href[REPLACE](/[?&](.+?)=([^&]*)/g, function(_, k, v) { q[k] = v })
+  href[REPLACE](queryReg, function(_, k, v) { q[k] = v })
   return q
 }
 
